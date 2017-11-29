@@ -20,6 +20,6 @@ ADD monerod.service monerod.service
 VOLUME [ "/root/.bitmonero" ]
 EXPOSE  18081
 
-RUN mv monerod.service /etc/systemd/system/monerod.service
-RUN /bin/systemctl enable monerod.service
-RUN /bin/systemctl status monerod
+#RUN mv monerod.service /etc/systemd/system/monerod.service
+#RUN /bin/systemctl enable monerod.service
+#RUN /bin/systemctl status monerod
