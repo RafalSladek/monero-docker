@@ -11,4 +11,4 @@ RUN cd monero-${moneroVersion} && mv * .. && cd .. && rm -rf monero-${moneroVers
 VOLUME [ "/root/.bitmonero" ]
 EXPOSE  18081
 
-CMD ["screen -dmS monerod monerod --fast-block-sync 1"]
+CMD ["monerod"]
