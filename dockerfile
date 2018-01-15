@@ -9,6 +9,7 @@ RUN tar -xvjf monero-linux-x64-${moneroVersion}.tar.bz2 && rm -f monero-linux-x6
 RUN cd monero-${moneroVersion} && mv * .. && cd .. && rm -rf monero-${moneroVersion}
 
 VOLUME [ "/root/.bitmonero" ]
-EXPOSE  18081
+EXPOSE 18080
+EXPOSE 18081
 
-CMD ["monerod"]
+ENTRYPOINT ["monerod", "--p2p-bind-ip=0.0.0.0", "--p2p-bind-port=18080", "--rpc-bind-ip=0.0.0.0", "--rpc-bind-port=18081", "--non-interactive", "--confirm-external-bind"] 
