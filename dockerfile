@@ -8,8 +8,8 @@ RUN wget https://downloads.getmonero.org/cli/monero-linux-x64-${moneroVersion}.t
 RUN tar -xvjf monero-linux-x64-${moneroVersion}.tar.bz2 && rm -f monero-linux-x64-${moneroVersion}.tar.bz2
 RUN cd monero-${moneroVersion} && mv * .. && cd .. && rm -rf monero-${moneroVersion}
 
-VOLUME [ "/root/.bitmonero" ]
-EXPOSE 18080
-EXPOSE 18081
+VOLUME /root/.bitmonero
+EXPOSE 18080 18081
 
-ENTRYPOINT ["monerod", "--p2p-bind-ip=0.0.0.0", "--p2p-bind-port=18080", "--rpc-bind-ip=0.0.0.0", "--rpc-bind-port=18081", "--non-interactive", "--confirm-external-bind"] 
+ENTRYPOINT ["./monerod"]
+CMD ["--restricted-rpc", "--rpc-bind-ip=0.0.0.0", "--confirm-external-bind"]
