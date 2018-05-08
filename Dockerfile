@@ -1,17 +1,27 @@
 FROM ubuntu:latest
+MAINTAINER Rafal Sladek rafal.sladek@gmail.com 
+ENV DAEMON_VERSION=0.12.0.0
+ENV DAEMON_ZIP=monero-linux-x64-v${DAEMON_VERSION}.tar.bz2
+ENV DAEMON_SRC=https://dlsrc.getmonero.org/cli/${DAEMON_ZIP}
 
-LABEL MAINTANER rafalsladek <rafal.sladek@gmail.com>
+RUN apt-get -yq update && \
+    apt-get -y upgrade && \
+    apt-get autoclean autoremove -yq && \
+    apt-get clean -yq
 
-WORKDIR /usr/local/bin
-RUN apt-get update -y -qq && apt upgrade -y -qq
-RUN apt-get install -y -qq sudo curl git vim htop wget bzip2 screen
-ENV moneroVersion v0.11.1.0
+RUN apt-get -y install tree wget bzip2
 
-RUN wget https://downloads.getmonero.org/cli/monero-linux-x64-${moneroVersion}.tar.bz2
-RUN tar -xvjf monero-linux-x64-${moneroVersion}.tar.bz2 && rm -f monero-linux-x64-${moneroVersion}.tar.bz2
-RUN cd monero-${moneroVersion} && mv * .. && cd .. && rm -rf monero-${moneroVersion}
+RUN cd /tmp && \
+    echo $DAEMON_SRC && \
+    wget -q $DAEMON_SRC && \
+    cd /usr/local/bin && \
+    tar -xvjf /tmp/${DAEMON_ZIP} && \
+    mv monero-v${DAEMON_VERSION}/* . && \ 
+    rm -f /tmp/${DAEMON_ZIP} && \
+    rm -rf monero-v${DAEMON_VERSION} && \
+    tree
 
-VOLUME /root/.bitmonero
-EXPOSE 18080 18081
+VOLUME [ "/root/.bitmonero" ]    
+EXPOSE  18080 18081
 
-ENTRYPOINT ["./monerod", "--restricted-rpc", "--rpc-bind-ip=0.0.0.0", "--confirm-external-bind"]
+CMD ["monerod", "--fast-block-sync=1", "--db-sync-mode=fastest"]
