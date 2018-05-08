@@ -1,29 +1,36 @@
-# monero-fullnode
+# monero-docker
 
-This image use ubuntu 16.04 to run monero daemon and monero wallet
-It creates by default a wallet and stores password in a file
+This image use ubuntu 16.04 to run monero daemon
 
 ### How to install this image
 ```
-docker pull rafalsladek/monero-fullnode
+docker pull rafalsladek/monero-docker
 ```
 
 ### How to download monero blockchain.
 
 You need to download to your machine blockchain file from getmonero.com
 ```
-cd 
-mkdir .bitmonero && cd .bitmonero
+cd && mkdir .bitmonero && cd .bitmonero
 wget https://downloads.getmonero.org/blockchain.raw
 ```
 
+### How to import blockchain.raw - one time action
+```
+docker run -it --rm -v ~/.bitmonero:/root/.bitmonero rafalsladek/monero-docker:latest monero-blockchain-import --show-time-stats=1 --resume=1 --batch=1 --batch-size=20000 --input-file=/root/.bitmonero/blockchain.raw 
+```
 
 ### How to use this image
 ```
-docker run -it -v ~/.bitmonero:/root/.bitmonero rafalsladek/monero-fullnode:latest /bin/bash
+docker run -d -v $(PWD)/.bitmonero:/root/.bitmonero -p 18080:18080 -p 18081:18081 --name monero-fullnode --restart unless-stopped  rafalsladek/monero-docker:latest
 ```
 
-### How to import blockchain.raw (inside docker conatiner)
+## How to see logs of running the container
 ```
-monero-blockchain-import --input-file /root/.bitmonero/blockchain.raw --batch-size 50000 --verify 0 --batch 1
+docker logs monero-fullnode --follow
+```
+
+## How to attach to running the container
+```
+docker attach monero-fullnode
 ```
