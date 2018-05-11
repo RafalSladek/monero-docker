@@ -23,6 +23,7 @@ RUN cd /tmp && \
     tree
 
 VOLUME [ "/root/.bitmonero" ]    
+COPY bitmonero.conf /root/.bitmonero
 EXPOSE  18080 18081
 
-CMD ["monerod", "--fast-block-sync=1", "--db-sync-mode=fastest"]
+CMD ["monerod", "--detach", "--config-file=/root/.bitmonero/bitmonero.conf"]
