@@ -1,2 +1,2 @@
-*.sh
-*.md
+buildDocker.sh
+README.md

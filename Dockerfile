@@ -22,8 +22,10 @@ RUN cd /tmp && \
     rm -rf monero-v${DAEMON_VERSION} && \
     tree
 
-VOLUME [ "/root/.bitmonero" ]    
-COPY bitmonero.conf /root/.bitmonero
+WORKDIR /root/
+VOLUME [ "/root/.bitmonero" ]
 EXPOSE  18080 18081
+COPY start.sh .
+RUN chmod +x *.sh
 
-CMD ["monerod", "--detach", "--config-file=/root/.bitmonero/bitmonero.conf"]
+CMD [ "./start.sh"]
