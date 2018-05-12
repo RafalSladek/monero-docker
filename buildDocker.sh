@@ -13,4 +13,6 @@ docker build -f Dockerfile -t rafalsladek/$imageName:$tag .
 #docker run -it --rm -v $(PWD)/.bitmonero:/root/.bitmonero -p 18080:18080 -p 18081:18081 --name monero-docker rafalsladek/$imageName /bin/bash
 
 # run container forever
-docker run -d -v $(PWD)/.bitmonero:/root/.bitmonero -p 18080:18080 -p 18081:18081 --name monero-docker --restart unless-stopped  rafalsladek/$imageName:latest
+docker run -d -v $(PWD)/.bitmonero:/root/.bitmonero -p 18080:18080 -p 18081:18081 --name monero-docker rafalsladek/$imageName:latest
+
+docker logs monero-docker --follow

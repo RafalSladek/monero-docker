@@ -8,7 +8,6 @@ docker pull rafalsladek/monero-docker
 ```
 
 ### How to download monero blockchain.
-
 You need to download to your machine blockchain file from getmonero.com
 ```
 cd && mkdir .bitmonero && cd .bitmonero
@@ -17,7 +16,7 @@ wget https://downloads.getmonero.org/blockchain.raw
 
 ### How to import blockchain.raw - one time action
 ```
-docker run -it --rm -v ~/.bitmonero:/root/.bitmonero rafalsladek/monero-docker:latest monero-blockchain-import --show-time-stats=1 --resume=1 --batch=1 --batch-size=20000 --input-file=/root/.bitmonero/blockchain.raw 
+docker run -it --rm -v ~/.bitmonero:/root/.bitmonero rafalsladek/monero-docker:latest monero-blockchain-import --show-time-stats=1 --resume=1 --batch=1 --batch-size=10000 --input-file=/root/.bitmonero/blockchain.raw 
 ```
 
 ### How to use this image
@@ -25,12 +24,12 @@ docker run -it --rm -v ~/.bitmonero:/root/.bitmonero rafalsladek/monero-docker:l
 docker run -d -v $(PWD)/.bitmonero:/root/.bitmonero -p 18080:18080 -p 18081:18081 --name monero-fullnode --restart unless-stopped  rafalsladek/monero-docker:latest
 ```
 
-## How to see logs of running the container
+### How to see logs of running the container
 ```
 docker logs monero-fullnode --follow
 ```
 
-## How to attach to running the container
+### How to attach to running the container
 ```
 docker attach monero-fullnode
 ```
