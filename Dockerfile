@@ -1,6 +1,7 @@
 FROM ubuntu:latest
 LABEL Author="Rafal Sladek rafal.sladek@gmail.com"
 
+ENV TZ=Europe/Berlin
 ENV DAEMON_VERSION=0.12.0.0
 ENV DAEMON_ZIP=monero-linux-x64-v${DAEMON_VERSION}.tar.bz2
 ENV DAEMON_SRC=https://dlsrc.getmonero.org/cli/${DAEMON_ZIP}
