@@ -21,7 +21,14 @@ docker run -it --rm -v ~/.bitmonero:/root/.bitmonero rafalsladek/monero-docker:l
 
 ### How to use this image
 ```
-docker run -d -v $(PWD)/.bitmonero:/root/.bitmonero -p 18080:18080 -p 18081:18081 --name monero-fullnode --restart unless-stopped  rafalsladek/monero-docker:latest
+docker run -d \
+    -e TZ=Europe/Berlin \
+    -v ~/.bitmonero:/root/.bitmonero \
+    -p 18080:18080 \
+    -p 18081:18081 \
+    --name monero-fullnode \
+    --restart unless-stopped \
+      rafalsladek/monero-docker:latest
 ```
 
 ### How to see logs of running the container
