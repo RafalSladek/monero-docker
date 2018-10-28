@@ -16,7 +16,14 @@ wget https://downloads.getmonero.org/blockchain.raw
 
 ### How to import blockchain.raw - one time action
 ```
-docker run -it --rm -v ~/.bitmonero:/root/.bitmonero rafalsladek/monero-docker:latest monero-blockchain-import --show-time-stats=1 --resume=1 --batch=1 --batch-size=10000 --input-file=/root/.bitmonero/blockchain.raw 
+docker run -it --rm -v ~/.bitmonero:/root/.bitmonero 
+rafalsladek/monero-docker:latest 
+monero-blockchain-import 
+--show-time-stats=1 
+--resume=1 
+--batch=1 
+--batch-size=10000 
+--input-file=/root/.bitmonero/blockchain.raw 
 ```
 
 ### How to use this image
