@@ -26,7 +26,18 @@ monero-blockchain-import
 --input-file=/root/.bitmonero/blockchain.raw 
 ```
 
-### How to use this image
+### How to use this image for full node
+```
+docker run -d \
+    -e TZ=Europe/Berlin \
+    -v ~/.bitmonero:/root/.bitmonero \
+    -p 18080:18080 \
+    -p 18081:18081 \
+    --name monero-fullnode \
+    --restart unless-stopped \
+      rafalsladek/monero-docker:latest
+```
+
 ```
 docker run -d \
     -e TZ=Europe/Berlin \
