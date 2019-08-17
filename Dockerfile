@@ -32,8 +32,7 @@ RUN cd /usr/local/bin && \
     mv monero-x86_64-linux-gnu/* .
 
 RUN rm -f /tmp/${DAEMON_ZIP} && \
-    rm -rf monero-x86_64-linux-gnu && \
-    tree
+    rm -rf monero-x86_64-linux-gnu
 
 WORKDIR /root/
 
