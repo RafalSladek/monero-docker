@@ -9,10 +9,10 @@ ENV RPCPORT=18081
 ENV WALLETFILE=PleaseChangeWalletFile
 ENV WALLETPASSWORDFILE=PleaseChangeWalletPassFile
 
-ENV DAEMON_VERSION=0.14.1.2
+ENV DAEMON_VERSION=0.15.0.1
 ENV DAEMON_ZIP=monero-linux-x64-v${DAEMON_VERSION}.tar.bz2
 ENV DAEMON_SRC=https://dlsrc.getmonero.org/cli/${DAEMON_ZIP}
-ENV DAEMON_FILE_SHA265=a4d1ddb9a6f36fcb985a3c07101756f544a5c9f797edd0885dab4a9de27a6228
+ENV DAEMON_FILE_SHA265=8d61f992a7e2dbc3d753470b4928b5bb9134ea14cf6f2973ba11d1600c0ce9ad
 
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
@@ -34,7 +34,7 @@ RUN cd /tmp && \
     echo "$DAEMON_FILE_SHA265  /tmp/${DAEMON_ZIP}" | sha256sum -c -  && \
     tar -xvf $DAEMON_ZIP && \
     rm $DAEMON_ZIP && \
-    cd monero-x86_64-linux-gnu/ && \
+    cd monero-x86_64-linux-gnu-v$DAEMON_VERSION/ && \
     mv * /usr/local/bin/ && \
     ls -al /usr/local/bin/
 
